@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://7188haek1n73"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_5bue4"]
+[ext_resource type="Script" path="res://scripts/PlayerInput.gd" id="2_qrae6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ns1nv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf68f"]
+albedo_color = Color(0.184314, 0.184314, 0.184314, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j4ybv"]
+material = SubResource("StandardMaterial3D_jf68f")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_368e4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o20kg"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = false
+properties/0/watch = false
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8hfuj"]
+properties/0/path = NodePath("..:rotation")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_5bue4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_ns1nv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.5)
+
+[node name="Eyes" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.303581, 0, 0, 0, 0.0584915, 0, -0.0169319, 0.0213387)
+mesh = SubResource("BoxMesh_j4ybv")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_368e4")
+
+[node name="SpawnSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_o20kg")
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("2_qrae6")
+
+[node name="RotationSynchronizer" type="MultiplayerSynchronizer" parent="PlayerInput"]
+replication_config = SubResource("SceneReplicationConfig_8hfuj")
