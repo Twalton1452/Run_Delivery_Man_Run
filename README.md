@@ -22,18 +22,18 @@
 - `AudioManager.tscn`
   - Responsible for music and sfx
   - Has 3 Buses:
-    - Master
-    - Music
-    - SFX
+	- Master
+	- Music
+	- SFX
   - Has an `AudioStreamPlayer` for music by default with no music attached
   - Unmutes the Audio Buses when exported
 
 ## Creating Levels
   - Add your level scenes to the `LevelStore` `Resource` file `res://resources/StandardLevels.tres`
   - The level being spawned should have a top level script that emits a `finished_level` `signal` when players finish a level
-    - once this `signal` is emitted then it will proceed to the next level
+	- once this `signal` is emitted then it will proceed to the next level
   - You can create another `LevelStore` for levels you are testing and adjust the `level_store` variable in `LevelManager.gd`
-    - Note: You can export the `level_store` variable for more of an editor workflow
+	- Note: You can export the `level_store` variable for more of an editor workflow
 
 ## Doesn't Include
 - Player scripts or spawning
