@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj7av5cdl2p5x"]
+
+[ext_resource type="Texture2D" uid="uid://c7q1fhjg15ufq" path="res://art/WhiteSquare.png" id="1_cy0xt"]
+[ext_resource type="Script" path="res://scripts/autoloads/Transition.gd" id="1_uk5qo"]
+
+[node name="Transition" type="Node"]
+script = ExtResource("1_uk5qo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cy0xt")

@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://e244a03u5ux3"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_3wpj0"]
+[ext_resource type="AudioStream" uid="uid://c710dv8bls4ec" path="res://sfx/click1.ogg" id="2_n2jq0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_38u1e"]
+font_size = 48
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_3wpj0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/MainMenu"]
+stream = ExtResource("2_n2jq0")
+bus = &"SFX"
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.5
+offset_top = 67.0
+offset_right = 87.5
+offset_bottom = 93.0
+grow_horizontal = 2
+text = "Networked Boilerplate Title"
+label_settings = SubResource("LabelSettings_38u1e")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -86.0
+offset_right = 210.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="IPAddressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter IP Address to Join..."
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

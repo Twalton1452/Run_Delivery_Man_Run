@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dja11dur4i75v"]
+
+[ext_resource type="Script" path="res://scripts/autoloads/LevelManager.gd" id="1_0aw6y"]
+[ext_resource type="AudioStream" uid="uid://dsx0ptls157de" path="res://sfx/confirmation_001.ogg" id="2_unuqk"]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource("1_0aw6y")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="LevelChangeSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_unuqk")
+bus = &"SFX"
+
+[connection signal="spawned" from="LevelSpawner" to="." method="_on_level_spawner_spawned"]
